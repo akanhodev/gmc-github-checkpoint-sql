@@ -1,44 +1,27 @@
 
--- 1. Create CUSTOMER Table
-CREATE TABLE CUSTOMER (
-    CustID VARCHAR2(5) PRIMARY KEY,
-    CustName VARCHAR2(20) NOT NULL,
-    Address VARCHAR2(50),
-    City VARCHAR2(20)
-);
+-- Insert Customers
+INSERT INTO CUSTOMER VALUES ('C01', 'Ahmed', '123 Main St', 'Tunis');
+INSERT INTO CUSTOMER VALUES ('C02', 'Fatma', '456 Oak Ave', 'Sfax');
+INSERT INTO CUSTOMER VALUES ('C03', 'Mohamed', '789 Pine Rd', 'Sousse');
 
--- 2. Create PRODUCT Table
-CREATE TABLE PRODUCT (
-    ProdID VARCHAR2(5) PRIMARY KEY,
-    ProdName VARCHAR2(20) NOT NULL,
-    Price NUMBER(6,2) CHECK (Price > 0)
-);
+-- Insert Products
+INSERT INTO PRODUCT VALUES ('P01', 'Laptop', 1200.00, 'Electronics');
+INSERT INTO PRODUCT VALUES ('P02', 'Mouse', 25.50, 'Electronics');
+INSERT INTO PRODUCT VALUES ('P03', 'Keyboard', 45.00, 'Electronics');
+INSERT INTO PRODUCT VALUES ('P04', 'Monitor', 300.00, 'Electronics');
 
--- 3. Create ORDERS Table
-CREATE TABLE ORDERS (
-    OrderID VARCHAR2(5) PRIMARY KEY,
-    CustID VARCHAR2(5) NOT NULL,
-    CONSTRAINT fk_orders_customer FOREIGN KEY (CustID) 
-        REFERENCES CUSTOMER(CustID)
-);
+-- Insert Orders
+INSERT INTO ORDERS (OrderID, CustID, OrderDate) 
+VALUES ('O01', 'C01', TO_DATE('2024-01-15', 'YYYY-MM-DD'));
 
--- 4. Create ORDER_DETAIL Table (Junction table for Many-to-Many relationship)
-CREATE TABLE ORDER_DETAIL (
-    OrderID VARCHAR2(5),
-    ProdID VARCHAR2(5),
-    Quantity NUMBER(4) CHECK (Quantity > 0),
-    CONSTRAINT pk_order_detail PRIMARY KEY (OrderID, ProdID),
-    CONSTRAINT fk_orderdetail_orders FOREIGN KEY (OrderID) 
-        REFERENCES ORDERS(OrderID),
-    CONSTRAINT fk_orderdetail_product FOREIGN KEY (ProdID) 
-        REFERENCES PRODUCT(ProdID)
-);
+INSERT INTO ORDERS (OrderID, CustID, OrderDate) 
+VALUES ('O02', 'C02', TO_DATE('2024-01-16', 'YYYY-MM-DD'));
 
+INSERT INTO ORDERS (OrderID, CustID, OrderDate) 
+VALUES ('O03', 'C01', TO_DATE('2024-01-17', 'YYYY-MM-DD'));
 
--- Add Category column to PRODUCT table
-ALTER TABLE PRODUCT 
-ADD Category VARCHAR2(20);
-
--- Add OrderDate column to ORDERS table with SYSDATE as default
-ALTER TABLE ORDERS 
-ADD OrderDate DATE DEFAULT SYSDATE;
+-- Insert Order Details
+INSERT INTO ORDER_DETAIL VALUES ('O01', 'P01', 2);
+INSERT INTO ORDER_DETAIL VALUES ('O01', 'P02', 5);
+INSERT INTO ORDER_DETAIL VALUES ('O02', 'P03', 3);
+INSERT INTO ORDER_DETAIL VALUES ('O03', 'P04', 1);
