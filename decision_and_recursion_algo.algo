@@ -23,9 +23,9 @@ FUNCTION isLeapYear(year)
 END FUNCTION
 
 Example calls :
-  isLeapYear(2000) → TRUE   (divisible by 400)
-  isLeapYear(1900) → FALSE  (divisible by 100, but NOT by 400)
-  isLeapYear(2024) → TRUE   (divisible by 4)
+  isLeapYear(2000) → TRUE
+  isLeapYear(1900) → FALSE
+  isLeapYear(2024) → TRUE
   isLeapYear(2023) → FALSE
 
 ----------------------------------------------------------------
@@ -61,19 +61,10 @@ PART 2 – RECURSION
 --- Algorithm 3 : Fibonacci Sequence ---
 
 FUNCTION fibonacci(n)
-    // Base cases
     IF n = 0 THEN RETURN 0
     IF n = 1 THEN RETURN 1
-
-    // Recursive case
     RETURN fibonacci(n - 1) + fibonacci(n - 2)
 END FUNCTION
-
-How it works for fibonacci(5) :
-  fibonacci(5)
-  = fibonacci(4) + fibonacci(3)
-  = (fibonacci(3) + fibonacci(2)) + (fibonacci(2) + fibonacci(1))
-  = ... = 5
 
 Sequence output (n = 0 to 8) :
   0  1  1  2  3  5  8  13  21
@@ -83,18 +74,14 @@ Sequence output (n = 0 to 8) :
 --- Algorithm 4 : Palindrome Checker ---
 
 FUNCTION isPalindrome(str)
-    // Step 1 – clean the string (lowercase, remove spaces & punctuation)
     cleaned ← toLower(str) with only letters and digits kept
 
-    // Base cases
     IF length(cleaned) <= 1 THEN RETURN TRUE
 
-    // Compare first and last characters
     IF cleaned[0] ≠ cleaned[last] THEN
         RETURN FALSE
     END IF
 
-    // Recursive case – check the middle part
     RETURN isPalindrome( cleaned[1 .. last-1] )
 END FUNCTION
 
@@ -111,6 +98,7 @@ END OF CHECKPOINT
 
 
 
+/*
 // ============================================================
 //   Decision Making & Recursive Algorithms
 //   Student: checkpoint exercise
@@ -134,12 +122,11 @@ function isLeapYear(year) {
   }
 }
 
-// Tests
 console.log("=== Leap Year Checker ===");
-console.log(`2000 → ${isLeapYear(2000)}`);  // true  (divisible by 400)
-console.log(`1900 → ${isLeapYear(1900)}`);  // false (divisible by 100, not 400)
-console.log(`2024 → ${isLeapYear(2024)}`);  // true  (divisible by 4)
-console.log(`2023 → ${isLeapYear(2023)}`);  // false
+console.log(`2000 → ${isLeapYear(2000)}`);
+console.log(`1900 → ${isLeapYear(1900)}`);
+console.log(`2024 → ${isLeapYear(2024)}`);
+console.log(`2023 → ${isLeapYear(2023)}`);
 
 
 // ---- 2. Ticket Pricing ----
@@ -163,9 +150,9 @@ function getTicketPrice(age) {
 }
 
 console.log("\n=== Ticket Pricing ===");
-getTicketPrice(8);   // Child  – $10
-getTicketPrice(15);  // Teenager – $15
-getTicketPrice(30);  // Adult  – $20
+getTicketPrice(8);
+getTicketPrice(15);
+getTicketPrice(30);
 
 
 // ============================================================
@@ -174,11 +161,8 @@ getTicketPrice(30);  // Adult  – $20
 
 // ---- 3. Fibonacci Sequence ----
 function fibonacci(n) {
-  // Base cases
   if (n === 0) return 0;
   if (n === 1) return 1;
-
-  // Recursive case: fib(n) = fib(n-1) + fib(n-2)
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
@@ -187,18 +171,14 @@ for (let i = 0; i <= 8; i++) {
   process.stdout.write(fibonacci(i) + " ");
 }
 console.log();
-// Expected: 0 1 1 2 3 5 8 13 21
 
 
 // ---- 4. Palindrome Checker ----
 function isPalindrome(str) {
-  // Clean the string: lowercase, remove non-alphanumeric characters
   const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, "");
 
-  // Base cases
   if (cleaned.length <= 1) return true;
 
-  // Check first and last characters, then recurse on the middle part
   if (cleaned[0] !== cleaned[cleaned.length - 1]) {
     return false;
   }
@@ -207,7 +187,8 @@ function isPalindrome(str) {
 }
 
 console.log("\n=== Palindrome Checker ===");
-console.log(`"racecar"          → ${isPalindrome("racecar")}`);          // true
-console.log(`"A man a plan a canal Panama" → ${isPalindrome("A man a plan a canal Panama")}`); // true
-console.log(`"hello"            → ${isPalindrome("hello")}`);            // false
-console.log(`"Was it a car or a cat I saw?" → ${isPalindrome("Was it a car or a cat I saw?")}`); // true
+console.log(`"racecar"          → ${isPalindrome("racecar")}`);
+console.log(`"A man a plan a canal Panama" → ${isPalindrome("A man a plan a canal Panama")}`);
+console.log(`"hello"            → ${isPalindrome("hello")}`);
+console.log(`"Was it a car or a cat I saw?" → ${isPalindrome("Was it a car or a cat I saw?")}`);
+*/
