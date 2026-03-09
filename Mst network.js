@@ -1,16 +1,7 @@
 // ============================================================
 // KRUSKAL'S ALGORITHM
 // ============================================================
-// Steps:
-//  1. Sort all edges by cost (cheapest first)
-//  2. Pick each edge — but skip it if it creates a cycle
-//  3. Stop when we have (vertices - 1) edges in our MST
-//
-// To detect cycles, we use Union-Find (Disjoint Set)
 
-// --- Union-Find helpers ---
-
-// Each node starts as its own parent (its own group)
 function makeParent(n) {
   const parent = [];
   const rank = [];
