@@ -1,0 +1,126 @@
+================================================================
+  CHECKPOINT – Simulating a Print Queue
+  Data Structure : Queue (FIFO)
+================================================================
+
+
+================================================================
+PART 1 – QUEUE CLASS
+================================================================
+
+CLASS Queue
+    items ← empty list
+
+    FUNCTION enqueue(element)
+        ADD element TO end of items
+    END FUNCTION
+
+    FUNCTION dequeue()
+        IF isEmpty() THEN
+            RETURN "Queue is empty"
+        END IF
+        REMOVE AND RETURN first element of items
+    END FUNCTION
+
+    FUNCTION peek()
+        IF isEmpty() THEN
+            RETURN "Queue is empty"
+        END IF
+        RETURN first element of items
+    END FUNCTION
+
+    FUNCTION isEmpty()
+        RETURN length(items) = 0
+    END FUNCTION
+
+    FUNCTION size()
+        RETURN length(items)
+    END FUNCTION
+
+    FUNCTION printQueue()
+        IF isEmpty() THEN
+            PRINT "Queue is empty"
+        ELSE
+            FOR each job IN items DO
+                PRINT "  → " + job.name + " (" + job.pages + " pages)"
+            END FOR
+        END IF
+    END FUNCTION
+
+END CLASS
+
+
+================================================================
+PART 2 – PRINTER QUEUE CLASS
+================================================================
+
+CLASS PrinterQueue
+    queue ← new Queue()
+
+    FUNCTION addJob(name, pages)
+        job ← { name: name, pages: pages }
+        queue.enqueue(job)
+        PRINT "Job added: " + name + " (" + pages + " pages)"
+    END FUNCTION
+
+    FUNCTION processJob()
+        IF queue.isEmpty() THEN
+            PRINT "No jobs to process"
+            RETURN
+        END IF
+        job ← queue.dequeue()
+        PRINT "Processing: " + job.name + " (" + job.pages + " pages) ... DONE"
+    END FUNCTION
+
+    FUNCTION showQueue()
+        PRINT "--- Current Print Queue (" + queue.size() + " jobs) ---"
+        queue.printQueue()
+    END FUNCTION
+
+END CLASS
+
+
+================================================================
+PART 3 – TEST / SIMULATION
+================================================================
+
+printer ← new PrinterQueue()
+
+printer.addJob("Alice - Report.pdf",   12)
+printer.addJob("Bob - Slides.pptx",     5)
+printer.addJob("Carol - Invoice.docx",  2)
+
+printer.showQueue()
+
+printer.processJob()
+printer.processJob()
+
+printer.showQueue()
+
+printer.processJob()
+printer.processJob()
+
+
+================================================================
+EXPECTED OUTPUT
+================================================================
+
+Job added: Alice - Report.pdf (12 pages)
+Job added: Bob - Slides.pptx (5 pages)
+Job added: Carol - Invoice.docx (2 pages)
+
+--- Current Print Queue (3 jobs) ---
+  → Alice - Report.pdf (12 pages)
+  → Bob - Slides.pptx (5 pages)
+  → Carol - Invoice.docx (2 pages)
+
+Processing: Alice - Report.pdf (12 pages) ... DONE
+Processing: Bob - Slides.pptx (5 pages) ... DONE
+
+--- Current Print Queue (1 jobs) ---
+  → Carol - Invoice.docx (2 pages)
+
+Processing: Carol - Invoice.docx (2 pages) ... DONE
+No jobs to process
+
+================================================================
