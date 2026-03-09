@@ -1,0 +1,213 @@
+================================================================
+  CHECKPOINT – Decision Making & Recursive Algorithms
+  Student-level pseudocode answer
+================================================================
+
+
+================================================================
+PART 1 – DECISION MAKING (if-else)
+================================================================
+
+--- Algorithm 1 : Leap Year Checker ---
+
+FUNCTION isLeapYear(year)
+    IF year MOD 400 = 0 THEN
+        RETURN TRUE
+    ELSE IF year MOD 100 = 0 THEN
+        RETURN FALSE
+    ELSE IF year MOD 4 = 0 THEN
+        RETURN TRUE
+    ELSE
+        RETURN FALSE
+    END IF
+END FUNCTION
+
+Example calls :
+  isLeapYear(2000) → TRUE   (divisible by 400)
+  isLeapYear(1900) → FALSE  (divisible by 100, but NOT by 400)
+  isLeapYear(2024) → TRUE   (divisible by 4)
+  isLeapYear(2023) → FALSE
+
+----------------------------------------------------------------
+
+--- Algorithm 2 : Ticket Pricing ---
+
+FUNCTION getTicketPrice(age)
+    IF age <= 12 THEN
+        price    ← 10
+        category ← "Child"
+    ELSE IF age <= 17 THEN
+        price    ← 15
+        category ← "Teenager"
+    ELSE
+        price    ← 20
+        category ← "Adult"
+    END IF
+
+    PRINT "Category: " + category + " | Price: $" + price
+    RETURN price
+END FUNCTION
+
+Example calls :
+  getTicketPrice(8)  → Child    $10
+  getTicketPrice(15) → Teenager $15
+  getTicketPrice(30) → Adult    $20
+
+
+================================================================
+PART 2 – RECURSION
+================================================================
+
+--- Algorithm 3 : Fibonacci Sequence ---
+
+FUNCTION fibonacci(n)
+    // Base cases
+    IF n = 0 THEN RETURN 0
+    IF n = 1 THEN RETURN 1
+
+    // Recursive case
+    RETURN fibonacci(n - 1) + fibonacci(n - 2)
+END FUNCTION
+
+How it works for fibonacci(5) :
+  fibonacci(5)
+  = fibonacci(4) + fibonacci(3)
+  = (fibonacci(3) + fibonacci(2)) + (fibonacci(2) + fibonacci(1))
+  = ... = 5
+
+Sequence output (n = 0 to 8) :
+  0  1  1  2  3  5  8  13  21
+
+----------------------------------------------------------------
+
+--- Algorithm 4 : Palindrome Checker ---
+
+FUNCTION isPalindrome(str)
+    // Step 1 – clean the string (lowercase, remove spaces & punctuation)
+    cleaned ← toLower(str) with only letters and digits kept
+
+    // Base cases
+    IF length(cleaned) <= 1 THEN RETURN TRUE
+
+    // Compare first and last characters
+    IF cleaned[0] ≠ cleaned[last] THEN
+        RETURN FALSE
+    END IF
+
+    // Recursive case – check the middle part
+    RETURN isPalindrome( cleaned[1 .. last-1] )
+END FUNCTION
+
+Example calls :
+  isPalindrome("racecar")                    → TRUE
+  isPalindrome("hello")                      → FALSE
+  isPalindrome("A man a plan a canal Panama")→ TRUE
+  isPalindrome("Was it a car or a cat I saw?")→ TRUE
+
+================================================================
+END OF CHECKPOINT
+================================================================
+
+
+
+
+// ============================================================
+//   Decision Making & Recursive Algorithms
+//   Student: checkpoint exercise
+// ============================================================
+
+
+// ============================================================
+// PART 1 – DECISION MAKING (if-else / switch)
+// ============================================================
+
+// ---- 1. Leap Year Checker ----
+function isLeapYear(year) {
+  if (year % 400 === 0) {
+    return true;
+  } else if (year % 100 === 0) {
+    return false;
+  } else if (year % 4 === 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// Tests
+console.log("=== Leap Year Checker ===");
+console.log(`2000 → ${isLeapYear(2000)}`);  // true  (divisible by 400)
+console.log(`1900 → ${isLeapYear(1900)}`);  // false (divisible by 100, not 400)
+console.log(`2024 → ${isLeapYear(2024)}`);  // true  (divisible by 4)
+console.log(`2023 → ${isLeapYear(2023)}`);  // false
+
+
+// ---- 2. Ticket Pricing ----
+function getTicketPrice(age) {
+  let price;
+  let category;
+
+  if (age <= 12) {
+    price    = 10;
+    category = "Child";
+  } else if (age <= 17) {
+    price    = 15;
+    category = "Teenager";
+  } else {
+    price    = 20;
+    category = "Adult";
+  }
+
+  console.log(`Age ${age} → ${category}: $${price}`);
+  return price;
+}
+
+console.log("\n=== Ticket Pricing ===");
+getTicketPrice(8);   // Child  – $10
+getTicketPrice(15);  // Teenager – $15
+getTicketPrice(30);  // Adult  – $20
+
+
+// ============================================================
+// PART 2 – RECURSION
+// ============================================================
+
+// ---- 3. Fibonacci Sequence ----
+function fibonacci(n) {
+  // Base cases
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+
+  // Recursive case: fib(n) = fib(n-1) + fib(n-2)
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log("\n=== Fibonacci Sequence ===");
+for (let i = 0; i <= 8; i++) {
+  process.stdout.write(fibonacci(i) + " ");
+}
+console.log();
+// Expected: 0 1 1 2 3 5 8 13 21
+
+
+// ---- 4. Palindrome Checker ----
+function isPalindrome(str) {
+  // Clean the string: lowercase, remove non-alphanumeric characters
+  const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+  // Base cases
+  if (cleaned.length <= 1) return true;
+
+  // Check first and last characters, then recurse on the middle part
+  if (cleaned[0] !== cleaned[cleaned.length - 1]) {
+    return false;
+  }
+
+  return isPalindrome(cleaned.slice(1, -1));
+}
+
+console.log("\n=== Palindrome Checker ===");
+console.log(`"racecar"          → ${isPalindrome("racecar")}`);          // true
+console.log(`"A man a plan a canal Panama" → ${isPalindrome("A man a plan a canal Panama")}`); // true
+console.log(`"hello"            → ${isPalindrome("hello")}`);            // false
+console.log(`"Was it a car or a cat I saw?" → ${isPalindrome("Was it a car or a cat I saw?")}`); // true
